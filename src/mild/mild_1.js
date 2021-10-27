@@ -46,7 +46,7 @@ export function maxAndMin(numbers)
 {
 	var min = Math.min(...numbers);
 	var max = Math.max(...numbers);
-	return "min: " + min.toString() + " max: " + max.toString();
+	return "max: " + max.toString() + " min: " + min.toString();
 }
 
 /**

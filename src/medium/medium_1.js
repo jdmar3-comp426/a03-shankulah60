@@ -30,8 +30,8 @@ export function getSum(array)
  */
 export function getMedian(array) 
 {
-	const middle = Math.floor(array.length / 2), 
-		nums = [...array].sort((a,b) => a-b);
+	const middle = Math.floor(array.length / 2);
+	const nums = [...array].sort((a,b) => a-b);
 	return array.length % 2 !== 0 ? nums[middle] : (num[middle -1] + nums[middle]) /2;
 }
 

@@ -11,9 +11,9 @@ export function getSum(array)
 {
 	//No idea what format output should be in...
 	var total = 0;
-	for (var i in arr) 
+	for (var i in array) 
 	{
-		total += arr[i];
+		total += array[i];
 	}
 	return total;
 }

@@ -143,7 +143,7 @@ function avgMpgByYearAndHybrid(mpg)
         }
         else
         {
-            arrar[key].notHybrid.city += car.city_mpg;
+            array[key].notHybrid.city += car.city_mpg;
             array[key].notHybrid.highway_mpg += car.highway_mpg;
             array[key].notHybrid.count += 1;
         }

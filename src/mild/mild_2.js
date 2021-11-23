@@ -76,7 +76,7 @@ export function removeKey(object, key)
  */
 export function removeKeyNonDestructive(object, key) 
 {
-	var obj_cpy = [...object];
+	var obj_cpy = {...object};
 	delete obj_cpy[key];
 	return obj_cpy;
 }
@@ -104,7 +104,7 @@ export function removeKeyNonDestructive(object, key)
  */
 export function removeKeys(object, keyList)
 {
-	var result = object;
+	var result = {...object};
 	for(var i = 0; i < keyList.length; i++)
 	{
 		delete result[keyList[i]];

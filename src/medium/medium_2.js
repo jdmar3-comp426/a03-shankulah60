@@ -105,10 +105,10 @@ export const moreStats = {
         }
         return array;
     }, []).sort((a,b) => (b.hybrids.length - a.hybrids.length)),
-    avgMpgByYearAndHybrid: avgMpgByYearAndHybrid(mpg_data)
+    avgMpgByYearAndHybrid: undefined //avgMpgByYearAndHybrid(mpg_data)
 };
 
-function avgMpgByYearAndHybrid(mpg)
+/*function avgMpgByYearAndHybrid(mpg)
 {
     let yr_arr = mpg.reduce(function (array, car){
         let key = car["year"];
@@ -153,4 +153,4 @@ function avgMpgByYearAndHybrid(mpg)
         delete year_arr[year].notHybrid.count;
     }
     return year_arr;
-}
+}*/

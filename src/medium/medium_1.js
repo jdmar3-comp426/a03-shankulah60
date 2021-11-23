@@ -18,6 +18,11 @@ export function getSum(array)
 	return total;
 }
 
+export function getAvg(array)
+{
+	return getSum(array) / array.length;
+}
+
 
 /**
  * Calculates the median of an array of numbers.

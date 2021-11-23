@@ -1,5 +1,5 @@
 import mpg_data from "./data/mpg_data.js";
-import {getMedian, getStatistics} from "./medium_1.js";
+import {getAvg, getMedian, getStatistics} from "./medium_1.js";
 import {getSum} from "./medium_1.js";
 
 /*
@@ -22,8 +22,8 @@ see under the methods section
  */
 export const allCarStats = {
     avgMpg: {
-        city: ((getSum(mpg_data.map((car) => car.city_mpg)))/(getSum(mpg_data.map((car) => car.city_mpg))).length),
-        highway: ((getSum(mpg_data.map((car) => car.highway_mpg))) / (getSum(mpg_data.map((car) => car.highway_mpg))).length)
+        city: (getAvg(mpg_data.map((car) => car.city_mpg))),
+        highway: (getAvg(mpg_data.map((car) => car.highway_mpg)))
     },
     allYearStats: getStatistics(mpg_data.map(car => car.year)),
     ratioHybrids: (getSum(mpg_data.map(car => car.hybrid)) / mpg_data.length),

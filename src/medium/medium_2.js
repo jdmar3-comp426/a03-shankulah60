@@ -90,3 +90,75 @@ export const allCarStats = {
 //export const moreStats = {
 
 //};
+
+export const moreStats = {
+    makerHybrids: mpg_data.reduce(function (array, car){
+        if(car["hybrid"])
+        {
+            let key = car["make"];
+            let i = array.findIndex(x => x["make"] == key);
+            if(i == -1)
+            {
+                array.push({
+                    "make": car["make"],
+                    "hybrids":[car["id"]]
+                });
+            }
+            else
+            {
+                array[i].hybrids.push(car["id"]);
+            }
+        }
+        return array;
+    }, []).sort((a,b) => (b.hybrids.length - a.hybrids.length)), 
+    avgMpgByYearAndHybrid: avgMpgByYearAndHybrid(mpg_data)
+};
+
+
+function avgMpgByYearAndHybrid(mpg)
+{
+    let yr_arr = mpg.reduce(function (array, car) {
+        let key = car["year"];
+        if(!array[key])
+        {
+            array[key] = {
+                "hybrid": {
+                    "city": 0,
+                    "highway": 0,
+                    "count": 0,
+                }, 
+                "notHybrid": {
+                    "city": 0,
+                    "highway": 0,
+                    "count": 0,
+                }
+            }
+        }
+
+        if(car["hybrid"])
+        {
+            array[key].hybrid.city += car.city_mpg;
+            array[key].hybrid.highway += car.highway_mpg;
+            array[key].hybrid.count += 1;
+        }
+        else
+        {
+            arrar[key].notHybrid.city += car.city_mpg;
+            array[key].notHybrid.highway_mpg += car.highway_mpg;
+            array[key].notHybrid.count += 1;
+        }
+        return array;
+    }, {});
+
+    for(let yr in yr_arr)
+    {
+        yr_arr[yr].hybrid.city = yr_arr[yr].hybrid.city / yr_arr[yr].hybrid.count;
+        yr_arr[yr].hybrid.highway = yr_arr[yr].hybrid.highway / yr_arr[yr].hybrid.count;
+        delete yr_arr[yr].hybrid.count;
+
+        yr_arr[yr].notHybrid.city = yr_arr[yr].notHybrid.city / yr_arr[yr].notHybrid.count;
+        yr_arr[yr].notHybrid.highway = yr_arr[yr].notHybrid.highway / yr_arr[yr].notHybrid.count;
+        delete yr_arr[yr].notHybrid.count;
+    }
+    return yr_arr;
+}

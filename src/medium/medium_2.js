@@ -1,6 +1,6 @@
 import mpg_data from "./data/mpg_data.js";
-import {getAvg, getMedian, getStatistics} from "./medium_1.js";
-import {getSum} from "./medium_1.js";
+import { getStatistics, getSum } from "./medium_1.js";
+import { getMean } from "./medium_1.js";
 
 /*
 This section can be done by using the array prototype functions.
@@ -22,8 +22,8 @@ see under the methods section
  */
 export const allCarStats = {
     avgMpg: {
-        city: (getAvg(mpg_data.map((car) => car.city_mpg))),
-        highway: (getAvg(mpg_data.map((car) => car.highway_mpg)))
+        city: (getMean(mpg_data.map((car) => car.city_mpg))),
+        highway: (getMean(mpg_data.map((car) => car.highway_mpg)))
     },
     allYearStats: getStatistics(mpg_data.map(car => car.year)),
     ratioHybrids: (getSum(mpg_data.map(car => car.hybrid)) / mpg_data.length),
@@ -87,71 +87,56 @@ export const allCarStats = {
  *
  * }
  */
-//export const moreStats = {
-
-//};
-
 export const moreStats = {
-    makerHybrids: mpg_data.reduce(function (array, car){
-        if(car["hybrid"])
-        {
+    makerHybrids: mpg_data.reduce(function (array, car) {
+        if (car["hybrid"]) {
             let key = car["make"];
             let i = array.findIndex(x => x["make"] == key);
-            if(i == -1)
-            {
+            if (i == -1) {
                 array.push({
                     "make": car["make"],
-                    "hybrids":[car["id"]]
+                    "hybrids": [car["id"]]
                 });
-            }
-            else
-            {
+            } else {
                 array[i].hybrids.push(car["id"]);
             }
         }
         return array;
-    }, []).sort((a,b) => (b.hybrids.length - a.hybrids.length)), 
+    }, []).sort((a, b) => (b.hybrids.length - a.hybrids.length)),
+
     avgMpgByYearAndHybrid: avgMpgByYearAndHybrid(mpg_data)
 };
 
-
-function avgMpgByYearAndHybrid(mpg)
-{
-    let yr_arr = mpg.reduce(function (array, car) {
+function avgMpgByYearAndHybrid(mpg) {
+    let year_array = mpg.reduce(function (array, car) {
         let key = car["year"];
-        if(!array[key])
-        {
+        if (!array[key]) {
             array[key] = {
                 "hybrid": {
                     "city": 0,
                     "highway": 0,
-                    "count": 0,
-                }, 
+                    "count": 0
+                },
                 "notHybrid": {
                     "city": 0,
                     "highway": 0,
-                    "count": 0,
+                    "count": 0
                 }
             }
         }
-
-        if(car["hybrid"])
-        {
+        if (car["hybrid"]){
             array[key].hybrid.city += car.city_mpg;
             array[key].hybrid.highway += car.highway_mpg;
-            array[key].hybrid.count += 1;
-        }
-        else
-        {
+            array[key].hybrid.count++;
+        } else {
             array[key].notHybrid.city += car.city_mpg;
-            array[key].notHybrid.highway_mpg += car.highway_mpg;
-            array[key].notHybrid.count += 1;
+            array[key].notHybrid.highway += car.highway_mpg;
+            array[key].notHybrid.count++;
         }
         return array;
     }, {});
 
-    for(let yr in yr_arr)
-    {
+    for (let yr in yr_arr) {
         yr_arr[yr].hybrid.city = yr_arr[yr].hybrid.city / yr_arr[yr].hybrid.count;
         yr_arr[yr].hybrid.highway = yr_arr[yr].hybrid.highway / yr_arr[yr].hybrid.count;
         delete yr_arr[yr].hybrid.count;
@@ -160,5 +145,7 @@ function avgMpgByYearAndHybrid(mpg)
         yr_arr[yr].notHybrid.highway = yr_arr[yr].notHybrid.highway / yr_arr[yr].notHybrid.count;
         delete yr_arr[yr].notHybrid.count;
     }
+
     return yr_arr;
 }
+

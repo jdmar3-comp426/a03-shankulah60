@@ -108,7 +108,7 @@ export const moreStats = {
 };
 
 function avgMpgByYearAndHybrid(mpg) {
-    let year_array = mpg.reduce(function (array, car) {
+    let yr_arr = mpg.reduce(function (array, car) {
         let key = car["year"];
         if (!array[key]) {
             array[key] = {

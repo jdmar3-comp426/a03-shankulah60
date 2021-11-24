@@ -1,6 +1,5 @@
 import mpg_data from "./data/mpg_data.js";
-import { getStatistics, getSum } from "./medium_1.js";
-import { getAvg } from "./medium_1.js";
+import { getStatistics, getSum, getAvg } from "./medium_1.js";
 
 /*
 This section can be done by using the array prototype functions.
@@ -89,15 +88,18 @@ export const allCarStats = {
  */
 export const moreStats = {
     makerHybrids: mpg_data.reduce(function (array, car) {
-        if (car["hybrid"]) {
+        if (car["hybrid"])
+        {
             let key = car["make"];
             let i = array.findIndex(x => x["make"] == key);
-            if (i == -1) {
+            if (i == -1) 
+            {
                 array.push({
                     "make": car["make"],
                     "hybrids": [car["id"]]
                 });
-            } else {
+            } else 
+            {
                 array[i].hybrids.push(car["id"]);
             }
         }
@@ -110,7 +112,8 @@ export const moreStats = {
 function avgMpgByYearAndHybrid(mpg) {
     let yr_arr = mpg.reduce(function (array, car) {
         let key = car["year"];
-        if (!array[key]) {
+        if (!array[key]) 
+        {
             array[key] = {
                 "hybrid": {
                     "city": 0,
@@ -124,11 +127,13 @@ function avgMpgByYearAndHybrid(mpg) {
                 }
             }
         }
-        if (car["hybrid"]){
+        if (car["hybrid"])
+        {
             array[key].hybrid.city += car.city_mpg;
             array[key].hybrid.highway += car.highway_mpg;
             array[key].hybrid.count++;
-        } else {
+        } else 
+        {
             array[key].notHybrid.city += car.city_mpg;
             array[key].notHybrid.highway += car.highway_mpg;
             array[key].notHybrid.count++;
@@ -136,7 +141,8 @@ function avgMpgByYearAndHybrid(mpg) {
         return array;
     }, {});
 
-    for (let yr in yr_arr) {
+    for (let yr in yr_arr) 
+    {
         yr_arr[yr].hybrid.city = yr_arr[yr].hybrid.city / yr_arr[yr].hybrid.count;
         yr_arr[yr].hybrid.highway = yr_arr[yr].hybrid.highway / yr_arr[yr].hybrid.count;
         delete yr_arr[yr].hybrid.count;

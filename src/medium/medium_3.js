@@ -17,8 +17,9 @@ queries.
  * sorted by horsepower in descending order.
  *
  */
-export function searchHighPower(car_data, minHorsepower, minTorque) {
-
+export function searchHighPower(car_data, minHorsepower, minTorque) 
+{
+    return car_data.filter(car => (car.horsepower >= minHorsepower) && (car.torque >= minTorque)).sort((a,b) => b.horsepower - a.horsepower);
 }
 
 
@@ -32,8 +33,9 @@ export function searchHighPower(car_data, minHorsepower, minTorque) {
  * sorted by highway_mpg in descending order
  *
  */
-export function searchMpg(car_data, minCity, minHighway) {
-
+export function searchMpg(car_data, minCity, minHighway) 
+{
+    return car_data.filter(car => (car.city_mpg >= minCity) && (car.highway_mpg >= minHighway)).sort((a,b) => b.highway_mpg - a.highway_mpg);
 }
 
 
@@ -45,8 +47,9 @@ export function searchMpg(car_data, minCity, minHighway) {
  * @param searchTerm A string to that is used for searching
  * @returns {[]} array of cars
  */
-export function searchName(car_data, searchTerm) {
-
+export function searchName(car_data, searchTerm) 
+{
+    return car_data.filter(car => (car.id.toLowerCase().includes(searchTerm.toLowerCase()))).sort((a,b) => b.id - a.id);
 }
 
 
@@ -58,6 +61,7 @@ export function searchName(car_data, searchTerm) {
  * @param {number[]} years - array of years to be included in the results e.g. [2010, 2012]
  * @returns {[]} an array of car objects
  */
-export function searchByYear(car_data, years) {
-
+export function searchByYear(car_data, years) 
+{
+    return car_data.filter(car => (car.year in years)).sort((a,b) => b.year - a.year);
 }

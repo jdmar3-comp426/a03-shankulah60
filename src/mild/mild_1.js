@@ -8,8 +8,9 @@
  * returns: '3 + 4 = 7'
  * see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
  */
-export function sumToString(a, b) {
-
+export function sumToString(a, b) 
+{
+	return a.toString() + " + " + b.toString() + " = " + (a+b).toString();
 }
 
 
@@ -23,8 +24,15 @@ export function sumToString(a, b) {
  * returns: [ 3, 4, 5, 6, 7 ]
  *
  */
-export function getIncreasingArray(startNumber, endNumber) {
-
+export function getIncreasingArray(startNumber, endNumber) 
+{
+	var retArray = [];
+	var i;
+	for(i = startNumber; i < endNumber +1; i++)
+	{
+		retArray.push(i);
+	}
+	return retArray;
 }
 
 /**
@@ -34,8 +42,11 @@ export function getIncreasingArray(startNumber, endNumber) {
  * see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
  * and https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math
  */
-export function maxAndMin(numbers) {
-
+export function maxAndMin(numbers) 
+{
+	var min = Math.min(...numbers);
+	var max = Math.max(...numbers);
+	return {max: max, min: min};
 }
 
 /**
@@ -48,6 +59,27 @@ export function maxAndMin(numbers) {
  * returns: {'2': 2, '3': 3, '6': 1, some: 2, hello: 1, '1,2': 1}
  *
  */
-export function countArray(array) {
-
+export function countArray(array) 
+{
+	var i;
+	var result = {};
+	for(i = 0; i < array.length; i++)
+	{
+		if(Array.isArray(i))
+		{
+			i.foreach(element)
+			{
+				if(!result[element])
+					result[element] = 0;
+				++result[element];
+			}
+		}
+		else
+		{
+			if(!result[array[i]])
+				result[array[i]] = 0;
+			++result[array[i]];
+		}
+	}
+	return result;
 }
